@@ -4,52 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2b4514d7-2d6f-4528-904c-801312a9e129" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.flaskenv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/flask_project.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/auth.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/basics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/config/swagger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/defaults.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/http_status_code.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/constants/validation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/cancel_user_blacklist.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/delete_user.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/get_all_users.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/get_one_users.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/get_user_role.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/get_users_role.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/update_user_blacklist.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/admin/update_user_placement.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/bio_update.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/login.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/register.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/submit_password_changes.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/user_role.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/verify_email_registration.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/verify_phone_registration.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/verify_registration.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/auth/verify_registration_success.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/password_email.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/password_reset_email.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/refresh_token.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/register_email.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/update_picture.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/user_password_email.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/runner.py" afterDir="false" />
-    </list>
+    <list default="true" id="2b4514d7-2d6f-4528-904c-801312a9e129" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
