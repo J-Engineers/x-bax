@@ -27,15 +27,17 @@ def get_all_users(current_user):
 
     output = []
     output1 = []
+    vigure = None
     for user in pagination.items:
-
+        token = Tokens.query.filter_by(user_id=user.public_id).first()
+        if token:
+            vigure = token.user_reg_stage
         user_data = {'name': user.name, 'username': user.username, 'email': user.email, 'id': user.public_id,
                  'password': user.password, 'is_admin': user.is_admin, 'user_role': get_user_role(user.user_type),
-                 'phone': user.phone, 'created_on': user.created_on, 'user_reg_stage': token.user_reg_stage,
+                 'phone': user.phone, 'created_on': user.created_on, 'user_reg_stage': vigure,
                  'state_name': user.state_name, 'local_government_name': user.local_government_name,
                  'profile_photo': user.profile_photo}
 
-        token = Tokens.query.filter_by(user_id=user.public_id).first()
         if not token or int(token.user_reg_stage) < 3:
             output1.append(user_data)
         output.append(user_data)
