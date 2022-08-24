@@ -27,7 +27,7 @@ S3_LOCATION = 'http://{}.s3.amazonaws.com/'.format(BUCKET_NAME)
 
 app_cors_config = {
     "origins": ['http://localhost:5000', 'http://e-services-app.herokuapp.com'],
-    "methods": ['GET', 'POST', 'PUT', 'DELETE'],
+    "methods": ['GET', 'POST', 'PUT', 'DELETE', 'OPTION'],
     "allow_headers": ['Authorization', 'Content-Type', 'accept']
 }
 
