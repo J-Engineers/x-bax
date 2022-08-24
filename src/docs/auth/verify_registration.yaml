@@ -1,0 +1,35 @@
+User Registration (Step 2 Part B) Verify User token and accept phone
+---
+tags:
+  - Registration
+security:
+  - APIKeyHeader: ['Authorization']
+parameters:
+  - name: body
+    description: The body should contain the user email token and user phone number
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "user_token"
+        - "user_phone"
+      properties:
+        user_token:
+          type: "string"
+          example: "12345"
+        user_phone:
+          type: "string"
+          example: "+2348138184872"
+responses:
+  202:
+    description: When a user token and phone number has been accepted
+
+  400:
+    description: Fails to accept token and phone due to bad request data
+
+  404:
+    description: Fails to accept token and phone due to user not found
+
+  403:
+    description: Fails to accept token and phone due to wrong approach

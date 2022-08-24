@@ -1,0 +1,45 @@
+User Registration (Step 5 Part A) Update Bio
+---
+tags:
+  - Registration
+security:
+  - APIKeyHeader: ['Authorization']
+parameters:
+  - name: body
+    description: The body should contain the user Bio data
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "user_state_name"
+        - "user_local_government_name"
+        - "user_name"
+      properties:
+        user_state_name:
+          type: "string"
+          example: "Akwa Ibom"
+        user_local_government_name:
+          type: "string"
+          example: "Etinan"
+        user_name:
+          type: "string"
+          example: "BensonUdo"
+responses:
+  202:
+    description: When a user password changes was accepted successfully
+
+  400:
+    description: Fails to password changes due to bad request data
+
+  401:
+    description: Fails due to - A user supplies incorrect credentials
+
+  403:
+    description: Forbidden due to - A user supplies incorrect credentials
+
+  404:
+    description: Fails due to - A user supplies incorrect credentials
+
+  408:
+    description: Fails due to - Email server could not process request

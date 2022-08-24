@@ -1,0 +1,30 @@
+User Registration (Step 2 Part A) Verify User public Id as they visit email verification page
+---
+tags:
+  - Registration
+parameters:
+  - name: public_id
+    description: The path should contain the user public id
+    in: path
+    required: true
+    schema:
+      type: object
+      required:
+        - "public_id"
+      properties:
+        public_id:
+          type: "string"
+          example: "e79ef799-86fa-423d-bf51-50d164b6f184"
+
+responses:
+  202:
+    description: When a user registration email was successful
+
+  400:
+    description: Fails to send email due to bad request data
+
+  404:
+    description: Fails to send email due to user not found
+
+  403:
+    description: Fails to send email due to wrong approach

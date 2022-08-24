@@ -1,0 +1,18 @@
+Admin Get users Role
+---
+tags:
+  - Admin
+security:
+  - APIKeyHeader: ['Authorization']
+responses:
+  200:
+    description: When an admin request is done
+
+  400:
+    description: Fails due to bad request data
+
+  404:
+    description: Fails due to user not found
+
+  403:
+    description: Fails due to wrong approach

@@ -1,0 +1,32 @@
+Admin get one user
+---
+tags:
+  - Admin
+security:
+  - APIKeyHeader: ['Authorization']
+parameters:
+  - name: public_id
+    description: The path should contain the user public id
+    in: path
+    required: true
+    schema:
+      type: object
+      required:
+        - "public_id"
+      properties:
+        public_id:
+          type: "string"
+          example: "e79ef799-86fa-423d-bf51-50d164b6f184"
+
+responses:
+  200:
+    description: When an admin request is done
+
+  400:
+    description: Fails due to bad request data
+
+  404:
+    description: Fails due to user not found
+
+  403:
+    description: Fails due to wrong approach

@@ -1,0 +1,23 @@
+User Registration (Step 5 Part B) Update profile picture
+---
+tags:
+  - Registration
+security:
+  - APIKeyHeader: ['Authorization']
+consumes: ['multipart/form-data']
+produces: ['application/json']
+parameters:
+  - name: file
+    description: The body should contain the user choice of image with field name called file
+    in: formData
+    required: true
+    type: "file"
+responses:
+  200:
+    description: When a user successfully uploads a new profile picture
+
+  400:
+    description: Fails to upload profile picture due to bad request data
+
+  401:
+    description: A user supplies incorrect credentials

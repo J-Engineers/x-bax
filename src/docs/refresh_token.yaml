@@ -1,0 +1,24 @@
+Send Refreshed Access Token To The User
+---
+tags:
+  - Authentication
+security:
+  - APIKeyHeader: ['Authorization']
+responses:
+  201:
+    description: When a user confirmation email was sent successfully
+
+  400:
+    description: Fails to send email due to bad request data
+
+  401:
+    description: Fails due to - A user supplies incorrect credentials
+
+  403:
+    description: Forbidden due to - A user supplies incorrect credentials
+
+  404:
+    description: Fails due to - A user supplies incorrect credentials
+
+  408:
+    description: Fails due to - Email server could not process request

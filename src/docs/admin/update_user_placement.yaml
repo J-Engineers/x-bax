@@ -1,0 +1,36 @@
+Admin update a user role
+---
+tags:
+  - Admin
+security:
+  - APIKeyHeader: ['Authorization']
+parameters:
+  - name: body
+    description: The body should contain the user public id and level
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "public_id"
+        - "level"
+      properties:
+        public_id:
+          type: "string"
+          example: "e79ef799-86fa-423d-bf51-50d164b6f184"
+        level:
+          type: "string"
+          example: "0"
+
+responses:
+  200:
+    description: When an admin request is done
+
+  400:
+    description: Fails due to bad request data
+
+  404:
+    description: Fails due to user not found
+
+  403:
+    description: Fails due to wrong approach
