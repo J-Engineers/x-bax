@@ -28,3 +28,7 @@ responses:
 
   403:
     description: Fails to send email due to wrong approach
+
+
+  422:
+    description: Fails due to - Bad Authorization Header

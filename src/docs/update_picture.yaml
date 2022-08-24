@@ -21,3 +21,6 @@ responses:
 
   401:
     description: A user supplies incorrect credentials
+
+  422:
+    description: Fails due to - Bad Authorization Header
