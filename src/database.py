@@ -29,6 +29,7 @@ class Users(db.Model):
 class Tokens(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     token = db.Column(db.String(500), unique=True, nullable=False)
+    refresh_token = db.Column(db.Text(), unique=True, nullable=False)
     blacklisted = db.Column(db.Boolean)
     created_on = db.Column(db.DateTime, default=datetime.utcnow)
     updated_on = db.Column(db.DateTime, onupdate=datetime.utcnow)
@@ -40,3 +41,15 @@ class Tokens(db.Model):
 
     def __repr__(self) -> str:
         return 'Tokens>>> {self.token}'
+
+
+class Logout(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    token = db.Column(db.Text(), unique=True, nullable=False)
+    refresh_token = db.Column(db.Text(), unique=True, nullable=False)
+    user_id = db.Column(db.String(500), db.ForeignKey('users.public_id'))
+    created_on = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_on = db.Column(db.DateTime, onupdate=datetime.utcnow)
+
+    def __repr__(self) -> str:
+        return 'Logout>>> {self.token}'

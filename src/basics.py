@@ -5,7 +5,7 @@ from flask import jsonify, request
 from flask_jwt_extended import get_jwt_identity
 
 from src.constants.http_status_code import HTTP_404_NOT_FOUND, HTTP_401_UNAUTHORIZED
-from src.database import Tokens, Users
+from src.database import Tokens, Users, Logout
 from src.constants.defaults import *
 import re
 import datetime
@@ -21,15 +21,18 @@ def token_required(f):
             return jsonify({'message': "Credentials are missing"}), HTTP_404_NOT_FOUND
 
         header_token = request.headers['Authorization'].replace("Bearer ", '')
+
+        current_user = Users.query.filter_by(public_id=public_id).first()
+        if not current_user:
+            return jsonify({'message': "User not found"}), HTTP_404_NOT_FOUND
+
         token = Tokens.query.filter_by(user_id=public_id).first()
         if not token:
             return jsonify({'message': "Credentials are missing"}), HTTP_404_NOT_FOUND
         if not token.token == header_token:
             return jsonify({'message': "Credentials Expired"}), HTTP_404_NOT_FOUND
-
-        current_user = Users.query.filter_by(public_id=public_id).first()
-        if not current_user:
-            return jsonify({'message': "User not found"}), HTTP_404_NOT_FOUND
+        if token.token == '':
+            return jsonify({'message': "logged out, login"}), HTTP_404_NOT_FOUND
 
         user_type = int(current_user.user_type)
         config_type = len(USER_TYPES)

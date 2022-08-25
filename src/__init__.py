@@ -15,7 +15,7 @@ from src.constants.defaults import *
 from src.constants.http_status_code import HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_401_UNAUTHORIZED, \
     HTTP_202_ACCEPTED, HTTP_403_FORBIDDEN, HTTP_400_BAD_REQUEST, HTTP_201_CREATED, HTTP_408_REQUEST_TIMEOUT
 from src.constants.validation import email_validation
-from src.database import db, Tokens, Users
+from src.database import db, Tokens, Users, Logout
 from flask_cors import CORS
 
 s3 = boto3.client('s3',
@@ -332,8 +332,12 @@ def create_app(test_config=None):
     @swag_from('./docs/refresh_token.yaml')
     def refresh_token():
         public_id = get_jwt_identity()
+        # check for refresh token in logout
+        header_refresh_token = request.headers['Authorization'].replace("Bearer ", '')
 
-        new_access_token = create_access_token(identity=public_id)
+        user_logout_token = Logout.query.filter_by(refresh_token=header_refresh_token).first()
+        if user_logout_token:
+            return jsonify({'message': "logged out, login"}), HTTP_404_NOT_FOUND
 
         user = Users.query.filter_by(public_id=public_id).first()
         if not user:
@@ -347,6 +351,12 @@ def create_app(test_config=None):
                 'message': 'Request is invalid'
             }), HTTP_401_UNAUTHORIZED
 
+        if token.blacklisted is True:
+            return jsonify({
+                'message': 'Your formal token was blacklisted'
+            }), HTTP_401_UNAUTHORIZED
+
+        new_access_token = create_access_token(identity=public_id)
         token.token = new_access_token
         db.session.commit()
 

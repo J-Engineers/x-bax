@@ -3,7 +3,7 @@ import random
 import validators
 from flasgger import swag_from
 from flask import Blueprint
-from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token
+from flask_jwt_extended import jwt_required, create_access_token, create_refresh_token, get_jwt
 from twilio.rest import Client
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -14,7 +14,7 @@ from src.constants.http_status_code import HTTP_400_BAD_REQUEST, HTTP_202_ACCEPT
 from src.constants.validation import registration_validation, registration_verification_validation, \
     registration_verification_phone_validation, profile_bio_validation, login_validation, reset_validation, \
     public_id_validation
-from src.database import db
+from src.database import db, Logout
 
 auth = Blueprint("auth", __name__, url_prefix="/api/v1/auth")
 
@@ -82,6 +82,7 @@ def create_user():
     new_token_query = Tokens(
         user_id=public_id,
         token=new_access_token,
+        refresh_token=new_refresh_token,
         blacklisted=False,
         user_reg_stage=1,
         password_recovery=None,
@@ -412,9 +413,6 @@ def login():
             {'message': 'User password is not correct'}
         ), HTTP_401_UNAUTHORIZED
 
-    new_access_token = create_access_token(identity=user.public_id)
-    new_refresh_token = create_refresh_token(identity=user.public_id)
-
     user_token = Tokens.query.filter_by(user_id=user.public_id).first()
     if not user_token:
         return jsonify(
@@ -426,15 +424,31 @@ def login():
             {'message': 'registration verification required'}
         ), HTTP_400_BAD_REQUEST
 
+    # revoke old tokens of the user if any
+    if not user_token.token == '':
+        logout_user = Logout(
+            user_id=user.public_id,
+            token=user_token.token,
+            refresh_token=user_token.refresh_token,
+            updated_on=datetime.datetime.utcnow()
+        )
+        db.session.add(logout_user)
+        db.session.commit()
+
     password_recovery = user_token.password_recovery
     email_token = user_token.email_token
     phone_token = user_token.phone_token
 
     db.session.delete(user_token)
     db.session.commit()
+
+    new_access_token = create_access_token(identity=user.public_id)
+    new_refresh_token = create_refresh_token(identity=user.public_id)
+
     new_token_query = Tokens(
         user_id=user.public_id,
         token=new_access_token,
+        refresh_token=new_refresh_token,
         blacklisted=False,
         password_recovery=password_recovery,
         email_token=email_token,
@@ -465,6 +479,33 @@ def login():
             'updated_on': user.updated_on
         }
     }), HTTP_200_OK
+
+
+@auth.route("/logout", methods=["DELETE"])
+@jwt_required(verify_type=False)
+@swag_from('./docs/auth/logout.yaml')
+@token_required
+def logout(current_user):
+    user_token = Tokens.query.filter_by(user_id=current_user.public_id).first()
+    if not user_token:
+        return jsonify(
+            {'message': 'Bad Request, token not resolved to this user'}
+        ), HTTP_400_BAD_REQUEST
+
+    logout_user = Logout(
+        user_id=current_user.public_id,
+        token=user_token.token,
+        refresh_token=user_token.refresh_token,
+        updated_on=datetime.datetime.utcnow()
+    )
+    user_token.token = ''
+    user_token.refresh_token = ''
+    db.session.add(logout_user)
+    db.session.commit()
+
+    return jsonify(
+        {'message': 'logout successful'}
+    ), HTTP_201_CREATED
 
 
 @auth.route('/user/password/forget', methods=['PUT'])

@@ -1,0 +1,31 @@
+Logout
+---
+tags:
+  - Authentication
+security:
+  - APIKeyHeader: ['Authorization']
+parameters:
+  - name: Authorization
+    description: The header should bear the refresh token
+    in: header
+    required: true
+    schema:
+      type: object
+      required:
+        - "Authorization"
+      properties:
+        Authorization:
+          type: "string"
+          example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2MTM5NTU4NywianRpIjoiYWI2YjExODctYmIzYy00ZmNlLTkwMzgtYjJhNDk3MmEyOTRmIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOiJlNzllZjc5OS04NmZhLTQyM2QtYmY1MS01MGQxNjRiNmYxODQiLCJuYmYiOjE2NjEzOTU1ODcsImV4cCI6MTY2Mzk4NzU4N30.tiAbEu_WSVskZsAzWTtMurc8EO6VyBN6Tw4XhEQdT1U"
+responses:
+  200:
+    description: When a user successfully logs in
+
+  400:
+    description: Fails to login due to bad request data
+
+  401:
+    description: A user supplies incorrect credentials
+
+  422:
+    description: Fails due to - Bad Authorization Header
