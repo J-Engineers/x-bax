@@ -65,4 +65,4 @@ for table in list_of_all_our_tables:
     if not table in tables_in_database:
 
         # create the table
-        my_db_cursor.execute("CREATE TABLE " + table )
+        my_db_cursor.execute("CREATE TABLE " + table)
