@@ -29,14 +29,14 @@ app_cors_config = {
     "origins": [
         'http://localhost:5000',
         'http://e-services-app.herokuapp.com',
-        'http://localhost:80/blueprint',
-        'http://efficientschools.org.ng/blueprint/v1'
+        'http://localhost:80',
+        'http://efficientschools.org.ng'
     ],
     "Access-Control-Allow-Origin": [
         'http://localhost:5000',
         'http://e-services-app.herokuapp.com',
-        'http://localhost:80/blueprint',
-        'http://efficientschools.org.ng/blueprint/v1'
+        'http://localhost:80',
+        'http://efficientschools.org.ng'
     ],
     "methods": ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     "allow_headers": ['Authorization', 'Content-Type', 'accept', 'api_key'],
