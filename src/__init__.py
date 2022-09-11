@@ -30,12 +30,14 @@ app_cors_config = {
         'http://localhost:5000',
         'http://e-services-app.herokuapp.com',
         'http://localhost:80',
+        'http://localhost:443',
         'http://efficientschools.org.ng'
     ],
     "Access-Control-Allow-Origin": [
         'http://localhost:5000',
         'http://e-services-app.herokuapp.com',
         'http://localhost:80',
+        'http://localhost:443',
         'http://efficientschools.org.ng'
     ],
     "methods": ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
